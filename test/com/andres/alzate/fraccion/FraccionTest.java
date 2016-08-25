@@ -29,9 +29,8 @@ public class FraccionTest {
     @Test
     public void creatingAFractionSuccessAndCheckReduction(){
         Fraction fraccionToReduce = new Fraction(6,4);
-        Fraction fraccion = fraccionToReduce.reduce();
-        assertThat(fraccion.getNumerador(),equalTo(3));
-        assertThat(fraccion.getDenominator(),equalTo(2));
+        assertThat(fraccionToReduce.getNumerador(),equalTo(3));
+        assertThat(fraccionToReduce.getDenominator(),equalTo(2));
     }
 
 }

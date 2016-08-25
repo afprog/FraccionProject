@@ -14,6 +14,7 @@ public class Fraction {
         } else {
             throw new IllegalArgumentException("Denominator can´t be zero");
         }
+        this.reduce();
     }
 
     public Integer getNumerador() {
@@ -24,7 +25,9 @@ public class Fraction {
         return denominator;
     }
 
-    public Fraction reduce() {
-        return null;
+    public void reduce() {
+        int mcd = IntegerCalculations.mcd(numerador, denominator);
+        denominator /= mcd;
+        numerador /= mcd;
     }
 }
