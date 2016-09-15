@@ -33,4 +33,37 @@ public class FraccionTest {
         assertThat(fraccionToReduce.getDenominator(),equalTo(2));
     }
 
+    @Test
+    public void sumFractionSuccess(){
+        Fraction fraccionOne = new Fraction(5,4);
+        Fraction fractionTwo = new Fraction(3,6);
+        Fraction result = fraccionOne.sum(fractionTwo);
+        assertThat(result.getNumerador(),equalTo(7));
+        assertThat(result.getDenominator(),equalTo(4));
+    }
+    @Test
+    public void sumFractionSuccessComplex(){
+        Fraction fraccionOne = new Fraction(25,24);
+        Fraction fractionTwo = new Fraction(13,16);
+        Fraction result = fraccionOne.sum(fractionTwo);
+        assertThat(result.getNumerador(),equalTo(89));
+        assertThat(result.getDenominator(),equalTo(48));
+    }
+    @Test
+    public void subFractionSuccess(){
+        Fraction fraccionOne = new Fraction(5,4);
+        Fraction fractionTwo = new Fraction(3,6);
+        Fraction result = fraccionOne.sub(fractionTwo);
+        assertThat(result.getNumerador(),equalTo(3));
+        assertThat(result.getDenominator(),equalTo(4));
+    }
+    @Test
+    public void subFractionSuccessComplex(){
+        Fraction fraccionOne = new Fraction(25,24);
+        Fraction fractionTwo = new Fraction(13,16);
+        Fraction result = fraccionOne.sub(fractionTwo);
+        assertThat(result.getNumerador(),equalTo(11));
+        assertThat(result.getDenominator(),equalTo(48));
+    }
+
 }
