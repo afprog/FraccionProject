@@ -1,0 +1,311 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Active Witness Real Time Server Interactions",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "activewitness.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "Biometric Server"
+    },
+    {
+      "name": "Application Server"
+    },
+    {
+      "name": "RealTime Server"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/register-face": {
+      "post": {
+        "tags": [
+          "Biometric Server"
+        ],
+        "summary": "Register or Unregister a picture to the Biometric Server with Qr Code",
+        "description": "",
+        "operationId": "register",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "qrcode",
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 5,
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "picture",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "action",
+            "type": "integer",
+            "required": true,
+            "description": "Action",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RegisterResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/access-query": {
+      "get": {
+        "tags": [
+          "Application Server"
+        ],
+        "summary": "Get Access for a user in Sensor",
+        "description": "",
+        "operationId": "getAccess",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "type": "string",
+            "name": "sensor_id",
+            "minLength": 8,
+            "maxLength": 8,
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "time",
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "date",
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "qr_code",
+            "minLength": 5,
+            "maxLength": 5,
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccessQueryResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/access-report": {
+      "post": {
+        "tags": [
+          "Application Server"
+        ],
+        "summary": "Post Access Report for a user in Sensor",
+        "description": "",
+        "operationId": "getAccessReport",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "type": "string",
+            "name": "sensor_id",
+            "minLength": 8,
+            "maxLength": 8,
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "time",
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "date",
+            "required": true
+          },
+          {
+            "in": "query",
+            "type": "string",
+            "name": "qr_code",
+            "minLength": 5,
+            "maxLength": 5,
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccessReportResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/health-check": {
+      "get": {
+        "tags": [
+          "RealTime Server"
+        ],
+        "summary": "Get Access for a user in Sensor",
+        "description": "",
+        "operationId": "getHealthCheck",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "type": "string",
+            "name": "sensor_id",
+            "minLength": 8,
+            "maxLength": 8,
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccessReportResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "RegisterResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "OK",
+            "Fail"
+          ]
+        },
+        "code": {
+          "type": "integer",
+          "description": "Action",
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    "AccessQueryResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "OK",
+            "Fail"
+          ]
+        },
+        "code": {
+          "type": "integer",
+          "description": "Action",
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    "AccessReportResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "OK",
+            "Fail"
+          ]
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
